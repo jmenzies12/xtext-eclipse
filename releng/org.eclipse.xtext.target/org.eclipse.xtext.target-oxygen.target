@@ -2,6 +2,24 @@
 <?pde version="3.8"?>
 <target name="org.eclipse.xtext.oxygen.target" sequenceNumber="6">
 <locations>
+
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.junit" version="0.0.0"/>
+		<unit id="com.google.inject" version="0.0.0"/>
+		<unit id="com.google.guava" version="15.0.0.v201403281430"/>
+		<unit id="org.apache.commons.cli" version="0.0.0"/>
+		<unit id="org.apiguardian" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
+		<unit id="org.junit.jupiter.params" version="0.0.0"/>
+		<unit id="org.junit.platform.commons" version="0.0.0"/>
+		<unit id="org.junit.platform.engine" version="0.0.0"/>
+		<unit id="org.opentest4j" version="0.0.0"/>
+		<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
+		<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20181128170323/repository"/>
+	</location>
+	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib" version="0.0.0"/>
@@ -91,21 +109,6 @@
 		<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
 	</location>
 	
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.junit" version="0.0.0"/>
-		<unit id="com.google.inject" version="0.0.0"/>
-		<unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
-		<unit id="org.apache.commons.cli" version="0.0.0"/>
-		<unit id="org.apiguardian" version="0.0.0"/>
-		<unit id="org.junit.jupiter.api" version="0.0.0"/>
-		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
-		<unit id="org.junit.jupiter.params" version="0.0.0"/>
-		<unit id="org.junit.platform.commons" version="0.0.0"/>
-		<unit id="org.junit.platform.engine" version="0.0.0"/>
-		<unit id="org.opentest4j" version="0.0.0"/>
-		<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
-		<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
-		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-03"/>
-	</location>
+	
 </locations>
 </target>
