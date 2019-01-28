@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,6 +17,8 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
+import org.eclipse.xtext.documentation.EObjectInComment;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -27,6 +29,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -34,6 +37,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
+ * @author Tamas Miklossy - add support for hyperlinking in javadoc
  */
 public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
 
@@ -50,6 +54,9 @@ public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	
+	@Inject
+	private IJavaDocTypeReferenceProvider javadocTypeReferenceProvider;
 
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
@@ -84,6 +91,16 @@ public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
 				}
 			}
 		}
+		
+		createHyperlinksInJavadoc(resource, offset, acceptor);
 	}
 
+	private void createHyperlinksInJavadoc(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
+		EObjectInComment eObjectReferencedInComment = javadocTypeReferenceProvider.computeEObjectReferencedInComment(resource, offset);
+		if (eObjectReferencedInComment != null) {
+			EObject target = eObjectReferencedInComment.getEObject();
+			ITextRegion region = eObjectReferencedInComment.getRegion();
+			createHyperlinksTo(resource, new Region(region.getOffset(), region.getLength()), target, acceptor);
+		}
+	}
 }
